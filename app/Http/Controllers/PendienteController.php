@@ -60,11 +60,11 @@ class PendienteController extends Controller
 
                     //y la inserto en los dias de diferencia
                     $diferenciadias = PrestarLibro::findOrFail($lib->id);
-                    $diferenciadias->dia = -($cantidadDias+1);
+                    $diferenciadias->diasf = -($cantidadDias+1);
                     $diferenciadias->save();
 
                 }else{
-                    $cantidadDias = Carbon::parse(s$presta->fechadevolucion)->diffInDays();
+                    $cantidadDias = Carbon::parse($presta->fechadevolucion)->diffInDays();
 
 
                     //y la inserto en los dias de diferencia

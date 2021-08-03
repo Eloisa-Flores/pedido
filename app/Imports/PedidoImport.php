@@ -4,11 +4,13 @@ namespace App\Imports;
 
 use App\Pedido;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use phpDocumentor\Reflection\Types\Collection;
+
 
 
 class PedidoImport implements  ToCollection,ToModel,WithHeadingRow
@@ -44,7 +46,7 @@ class PedidoImport implements  ToCollection,ToModel,WithHeadingRow
     {
         $data = [];
         foreach ($rows as $row) {
-            $data[] = array(
+            $data::Create([
                 'pedido' => $row[0],
                 'codigo' => $row[1],
                 'descripcion' => $row[2],
@@ -56,7 +58,7 @@ class PedidoImport implements  ToCollection,ToModel,WithHeadingRow
                 'cantidad_original' => $row[8],
                 'cantidad_recibida' => $row[9],
                 'cantidad_pendiente' => $row[10],
-            );
+            ]);
 
         }
         DB::table('home')->insert($data);
