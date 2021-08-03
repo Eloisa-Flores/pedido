@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
 use App\Exports\DashboardExport;
 use App\Exports\PedidoExport;
 use App\Imports\PedidoImport;
+use App\Imports\PedidosImport;
 use App\Pedido;
 use App\PrestarLibro;
 use Carbon\Carbon;
@@ -40,7 +41,7 @@ class HomeController extends Controller
             foreach ($home as $lib) {
 
 //comparo las fechas que tiene que ser devuleto con la actual
-                if ($lib->fecha_requerida >= Carbon::now()->format('Y-m-d')) {
+                if ($lib->fecha_requerida >= Carbon::now()) {
 
                     $cantidadDias = Carbon::parse($lib->fecha_requerida)->diffInDays();
 
@@ -246,7 +247,13 @@ class HomeController extends Controller
        }
        return back()->with('success', 'Excel Data Imported successfully.');
     }
+    public function import2(Request $request)
+    {
+        $path = $request->file('excel');
+        Excel::import(new PedidosImport, $path);
 
+        return redirect('/')->with('success', 'All good!');
+    }
 
     }
 

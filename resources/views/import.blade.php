@@ -21,7 +21,7 @@
             <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>{{$message}}</strong></div>
         @endif
-    <form method="post" action="{{url('importData')}}" enctype="multipart/form-data">
+    <form method="post" action="{{route('importData')}}" enctype="multipart/form-data">
 {{csrf_field()}}
 <div class="row">
     <br><br>

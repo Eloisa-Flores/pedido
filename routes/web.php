@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/exportar','HomeController@exportar')->name('exportar');
     Route::get('/import','HomeController@import')->name('import');
     Route::get('/importData', 'HomeController@importData');
-    Route::post('/importData', 'HomeController@importData');
+    Route::post('/importData', 'HomeController@import2')->name('importData');
 
 
     //--------------------------------------------PARA Pendietes Libros ROUTES-------------------------------------------------------->
