@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::resource('/home', 'HomeController');
+    Route::resource('/', 'HomeController');
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/exportar','HomeController@exportar')->name('exportar');
     Route::get('/import','HomeController@import')->name('import');

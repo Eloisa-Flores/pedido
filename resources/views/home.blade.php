@@ -230,11 +230,11 @@
     <a href="{{url('/import')}}" type="button" class="btn btn-primary" ><i class="fas fa-file-import"></i> Importar</a>
 
     <br><br>
+    @foreach($home3 as $homedata)
     <table id="datatable" class="table table-light" >
         <thead>
 
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">N° de Pedido</th>
             <th scope="col">Codigo de Unidad</th>
             <th scope="col">Descripción</th>
@@ -242,44 +242,50 @@
             <th scope="col">Nota</th>
             <th scope="col">Fecha Pedido</th>
             <th scope="col">Fecha Requerida</th>
-            <th scope="col">Empaque</th>
-            <th scope="col">Cantidad Original</th>
-            <th scope="col">Cantidad Recibida</th>
-            <th scope="col">Cantidad Pendiente</th>
-            <th scope="col">Dias R/F</th>
-            <th scope="col">Acciones</th>
-        </thead>
+
+
         <tbody>
-        @foreach($home3 as $homedata)
+
 
             <tr>
-                <th>{{$homedata->id}}</th>
-                <th>{{$homedata->pedido}}</th>
-                <th>{{$homedata->codigo}}</th>
-                <th>{{$homedata->descripcion}}</th>
-                <th>{{$homedata->fabrica}}</th>
-                <th>{{$homedata->nota}}</th>
-                <th>{{$homedata->fecha_pedido}}</th>
-                <th>{{$homedata->fecha_requerida}}</th>
-                <th>{{$homedata->empaque}}</th>
-                <th>{{$homedata->cantidad_original}}</th>
-                <th>{{$homedata->cantidad_recibida}}</th>
-                <th>{{$homedata->cantidad_pendiente}}</th>
-                <th>{{$homedata->dias}}</th>
+                <td>{{$homedata->pedido}}</td>
+                <td>{{$homedata->codigo}}</td>
+                <td>{{$homedata->descripcion}}</td>
+                <td>{{$homedata->fabrica}}</td>
+                <td>{{$homedata->nota}}</td>
+                <td>{{$homedata->fecha_pedido}}</td>
+                <td>{{$homedata->fecha_requerida}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Empaque</th>
+                <th scope="col">Cantidad Original</th>
+                <th scope="col">Cantidad Recibida</th>
+                <th scope="col">Cantidad Pendiente</th>
+                <th scope="col">Dias R/F</th>
+                <th scope="col">Acciones</th>
+            </tr>
+            <tr>
+                <td>{{$homedata->cantidad_original}}</td>
+                <td>{{$homedata->cantidad_recibida}}</td>
+                <td>{{$homedata->cantidad_pendiente}}</td>
+                <td>{{$homedata->dias}}</td>
+                <td>{{$homedata->empaque}}</td>
+
 
                 <td>
 
 
                     <a href="#" class="btn btn-success edit">Editar</a>
+                </td><td>
                     <a href="#" class="btn btn-danger delete" >Eliminar</a>
                 </td>
             </tr>
-        @endforeach
+
         </tbody>
 
 
     </table>
-
+    @endforeach
 
 </div>
 
