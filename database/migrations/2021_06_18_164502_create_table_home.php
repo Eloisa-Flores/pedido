@@ -16,7 +16,7 @@ class CreateTableHome extends Migration
         Schema::create('home', function (Blueprint $table) {
                $table->increments('id');
             $table->string('pedido');
-            $table->string('codigo');
+            $table->string('codigo')->references("codigo")->on("empresas");
             $table->string('descripcion');
             $table->string('fabrica');
             $table->string('nota');
@@ -26,7 +26,8 @@ class CreateTableHome extends Migration
             $table->integer('cantidad_original');
             $table->integer('cantidad_recibida');
             $table->integer('cantidad_pendiente');
-            $table->string('dias');
+            $table->string('dias')->default(0);
+            $table->string('estado')->default('Solicitado');
             $table->timestamps();
         });
     }

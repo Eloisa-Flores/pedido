@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 
 
 
-use App\Exports\DashboardExport;
+use App\Empresa;
 use App\Exports\PedidoExport;
 use App\Imports\PedidoImport;
 use App\Imports\PedidosImport;
 use App\Pedido;
-use App\PrestarLibro;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +25,29 @@ class HomeController extends Controller
      */
 
 
-   public function index()
+   public function index(Request $request)
     {
-        $home2 = Pedido::all();
+
+        if ($request){
+            $query = trim($request->get("search"));
+        }
+        $home2 = DB::table("home")
+            ->leftJoin("empresas","home.codigo","=","empresas.codigo")
+            ->select("home.id",
+                "home.estado",
+                "home.pedido",
+                "home.codigo",
+                "home.descripcion",
+                "home.fabrica",
+                "home.nota",
+                "home.fecha_pedido",
+                "home.fecha_requerida",
+                "home.empaque",
+                "home.cantidad_original",
+                "home.cantidad_recibida",
+                "home.cantidad_pendiente",
+                 "home.dias")
+            ->where('estado','=','Solicitado')->get();
 
         foreach ($home2 as $homes) {
 
@@ -62,9 +81,27 @@ class HomeController extends Controller
                 }
             }
         }
-        $home3 = Pedido::all();
+        $home3 = DB::table("home")
+            ->leftJoin("empresas","home.codigo","=","empresas.codigo")
+            ->select("home.id",
+                "home.estado",
+                "home.pedido",
+                "home.codigo",
+                "home.descripcion",
+                "home.fabrica",
+                "home.nota",
+                "home.fecha_pedido",
+                "home.fecha_requerida",
+                "home.empaque",
+                "home.cantidad_original",
+                "home.cantidad_recibida",
+                "home.cantidad_pendiente",
+                "home.dias")
+            ->where('estado','=','Solicitado')
+            ->where("pedido","Like","%".$query."%")->get();
 
-         return view('home')->with('home3',$home3);
+        $empresas = Empresa::all();
+         return view('home')->with('home3',$home3)->with('empresa',$empresas);
     }
 
     /**
@@ -115,7 +152,7 @@ class HomeController extends Controller
 
         $home->save();
 
-        return redirect('/home')->with('success', 'Datos Guardados') ;
+        return redirect('/')->with('success', 'Datos Guardados') ;
     }
 
     /**
@@ -179,7 +216,7 @@ class HomeController extends Controller
 
         $home->save();
 
-        return redirect('/home')->with('success', 'Datos Actualizados') ;
+        return redirect('/')->with('success', 'Datos Actualizados') ;
     }
 
     /**
@@ -193,7 +230,7 @@ class HomeController extends Controller
         $home= Pedido::find($id);
         $home->delete();
 
-        return redirect('/home')->with('success', 'Datos Eliminados') ;
+        return redirect('/')->with('success', 'Datos Eliminados') ;
 
     }
     public function exportar(Request  $request)
@@ -252,7 +289,7 @@ class HomeController extends Controller
         $path = $request->file('excel');
         Excel::import(new PedidosImport, $path);
 
-        return redirect('/')->with('success', 'All good!');
+        return redirect('/')->withExito('Importado Correctamente');
     }
 
     }

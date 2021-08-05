@@ -32,4 +32,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/LibroPendiente/borrar','PrestarLibroController@destroy2')->name('LibroPendienteborrar');
     Route::post('/LibroPendiente/export', 'PrestarLibroController@export2')->name("exportarLibroPendiente");
     Route::get('/LibroPendiente/export', 'PrestarLibroController@export2')->name("exportarLibroPendiente");
+
+
+    //--------------------------------------------PARA AREA ROUTES-------------------------------------------------------->
+    Route::get('/empresa','EmpresaController@index')->name('verarea');
+    Route::post('/empresa/crearArea','EmpresaController@store')->name('creararea');
+    Route::put('/empresa/editarArea','EmpresaController@edit')->name('editararea');
+    Route::delete('/empresa/borrarArea','EmpresaController@destroy')->name('borrararea');
+
 });

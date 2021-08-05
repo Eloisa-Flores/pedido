@@ -27,6 +27,7 @@
                 </button>
             </div>
 
+
             <form action="{{action('HomeController@store')}}" method="POST">
 
                 {{csrf_field()}}
@@ -44,9 +45,22 @@
                         <label >Descripción</label>
                         <input type="text" class="form-control" name="descripcion" placeholder="Ingrese la Descripción">
                     </div>
-                    <div class="form-group">
-                        <label >Codigo de Fábrica</label>
-                        <input type="text" class="form-control"  name="fabrica" placeholder="Ingreso el codigo de fabrica">
+
+                    <div class="form-group ">
+                        <label for="fabrica">  Codigo Empresa</label>
+                        <select name="fabrica"
+                                required="required"
+                                class=" select2Empresa form-control @error('id_marca')
+                                    is-invalid @enderror" id="codigo">
+                            <option  disabled selected value="">Seleccione</option>
+                            @foreach($empresa as $libros)
+                                <option style="color:#151313" value="{{$libros->codigo}}" @if(Request::old('fabrica')==$libros->codigo){{'selected'}}@endif
+                                @if(session("idMarca"))
+                                    {{session("idMarca")==$libros->codigo ? 'selected="selected"':''}}
+                                    @endif>{{$libros->codigo}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label >Nota</label>
@@ -99,7 +113,7 @@
                 </button>
             </div>
 
-            <form action="/ligero_colombia" method="POST" id="editForm">
+            <form action="/" method="POST" id="editForm">
                 {{csrf_field()}}
                 {{method_field('put')}}
 
@@ -117,10 +131,17 @@
                         <label >Descripción</label>
                         <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Ingrese la Descripción">
                     </div>
-                    <div class="form-group">
-                        <label >Codigo de Fábrica</label>
-                        <input type="text" class="form-control"  name="fabrica" id="fabrica" placeholder="Ingreso el codigo de fabrica">
-                    </div>
+                    <select name="fabrica"
+                            required
+                            style="width: 100%"
+                            class="select2TipoCategoria form-control @error('id_semilla') is-invalid @enderror"
+                            id="fabrica" required="required">
+                        <option disabled selected value="">Seleccione</option>
+                        @foreach($empresa as  $libros)
+                            <option value="{{$libros->codigo}}">{{$libros->codigo}}
+                            </option>
+                        @endforeach
+                    </select>
                     <div class="form-group">
                         <label >Nota</label>
                         <input type="text" class="form-control" name="nota" id="nota" placeholder="Ingrese la nota">
@@ -173,7 +194,7 @@
                 </button>
             </div>
 
-            <form action="/home" method="POST" id="deleteForm">
+            <form action="/" method="POST" id="deleteForm">
 
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
@@ -228,8 +249,39 @@
     <a type="button" href="{{route('exportar')}}" class="btn btn-success" > Exportar </a>
 
     <a href="{{url('/import')}}" type="button" class="btn btn-primary" ><i class="fas fa-file-import"></i> Importar</a>
-
+    <form  class="d-none d-md-inline-block form-inline
+                           ml-auto mr-0 mr-md-2 my-0 my-md-0 mb-md-2">
+        <div class="input-group" style="width: 300px">
+            <input class="form-control" name="search" type="search" placeholder="Search"
+                   aria-label="Search">
+            <div class="input-group-append">
+                <a id="borrarBusqueda" class="btn btn-danger hideClearSearch" style="color: white"
+                   href="{{url("/")}}">&times;</a>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
     <br><br>
+
+    @if(session("exito"))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session("exito")}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if($errors->any())
+        <div class="alert alert-warning alert-dismissible fade show " role="alert">
+
+            @foreach ($errors->all() as $error)
+                <span class="fa fa-exclamation-triangle"></span> {{ $error }}
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     @foreach($home3 as $homedata)
     <table id="datatable" class="table table-light" >
         <thead>
@@ -265,11 +317,12 @@
                 <th scope="col">Acciones</th>
             </tr>
             <tr>
+                <td>{{$homedata->empaque}}</td>
                 <td>{{$homedata->cantidad_original}}</td>
                 <td>{{$homedata->cantidad_recibida}}</td>
                 <td>{{$homedata->cantidad_pendiente}}</td>
                 <td>{{$homedata->dias}}</td>
-                <td>{{$homedata->empaque}}</td>
+
 
 
                 <td>
@@ -325,7 +378,7 @@
             $('#cantidad_pendiente').val(data[11]);
 
 
-            $('#editForm').attr('action','/home/'+data[0]);
+            $('#editForm').attr('action','/'+data[0]);
             $('#editModal').modal('show');
         });
         //End Edit Record
@@ -341,7 +394,7 @@
 
             // $('#id').val(data[0]);
 
-            $('#deleteForm').attr('action','/home/'+data[0]);
+            $('#deleteForm').attr('action','/'+data[0]);
             $('#deleteModal').modal('show');
         });
         //End Delete Record
