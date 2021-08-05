@@ -41,12 +41,12 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item  active">
-                            <a class="dropdown-item" href="#">Pendientes</a> <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/pendientes">Pendientes</a> <div class="dropdown-menu">
 
                             </div></li>
 
                         <li class="nav-item  active">
-                            <a class="dropdown-item " href="#">Historial </a>
+                            <a class="dropdown-item " href="/historial">Historial </a>
 
                         </li>
                         <li class="nav-item  active">

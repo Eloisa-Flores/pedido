@@ -43,4 +43,16 @@ Route::group(['middleware' => 'auth'], function () {
 //--------------------------------------------PARA Entrega de Pedido ROUTES-------------------------------------------------------->
     Route::put('/entregapedido','HomeController@entrega')->name('entregapedido');
 
+
+
+    //--------------------------------------------PARA Pendientes ROUTES-------------------------------------------------------->
+    Route::get('/pendientes','PendienteController@index')->name('pendientes');
+    Route::put('/entregapedidos','PendienteController@entrega')->name('entregapedidos');
+
+
+    //--------------------------------------------PARA Historial ROUTES-------------------------------------------------------->
+    Route::get('/historial','HistorialController@index')->name('historial');
+    Route::delete('/historial/borrar','HistorialController@destroy')->name('historialborrar');
+
+
 });
