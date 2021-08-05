@@ -10,6 +10,7 @@ use App\Exports\PedidoExport;
 use App\Imports\PedidoImport;
 use App\Imports\PedidosImport;
 use App\Pedido;
+use App\PrestarLibro;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -292,5 +293,64 @@ class HomeController extends Controller
         return redirect('/')->withExito('Importado Correctamente');
     }
 
+public function entrega (Request $request){
+        $cantidad = $request->input('cantidad');
+
+    $id = $request->input('id');
+
+    $home3 = DB::table("home")
+        ->leftJoin("empresas","home.codigo","=","empresas.codigo")
+        ->select("home.id",
+            "home.estado", "home.pedido", "home.codigo", "home.descripcion", "home.fabrica", "home.nota", "home.fecha_pedido",
+            "home.fecha_requerida", "home.empaque", "home.cantidad_original", "home.cantidad_recibida", "home.cantidad_pendiente",
+            "home.dias",   "home.estado")
+        ->where('home.id','=',$id)->get();
+
+        foreach ($home3 as $h){
+            if ($h->cantidad_pendiente == $cantidad){
+                $home =  Pedido::findOrFail($id);
+                $home->cantidad_recibida =+ $cantidad;
+                $home->cantidad_pendiente = 0;
+                $home->estado = 'Entregado';
+                $home->save();
+
+                return redirect('/')->withExito( 'Entrega Realizada Exitosamente ') ;
+            }
+
+
+            if ($h->cantidad_pendiente > $cantidad) {
+                $home = Pedido::findOrFail($id);
+
+                $home->cantidad_original = $h->cantidad_original ;
+                $home->cantidad_recibida =+$cantidad;
+                $home->cantidad_pendiente =($h->cantidad_original - $cantidad);
+                $home->estado = 'Pendiente';
+                $home->save();
+
+                return redirect('/')->withExito('Una Parte de la entrega fue realizada exitosamente ');
+            }
+            if ($h->cantidad_pendiente < $cantidad) {
+
+                return redirect('/')->withError('La cantidad no puede ser mayor a la Pendiente');
+            }
+        }
+
+
+
+
+}
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
 

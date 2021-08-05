@@ -18,3 +18,14 @@ $('#modalEditarArea').on('show.bs.modal', function (e) {
     modal.find('.modal-body #name').val(name);
     modal.find('.modal-body #codigo').val(codigo);
 });
+
+$('#modalBorrarPrestaLibro').on('show.bs.modal', function (e) {
+    var button = $(e.relatedTarget);
+    var id = button.data('id');
+    var cantidad_pendiente = button.data('cantidad_pendiente');
+
+    var modal=$(this);
+    modal.find('.modal-footer #id').val(id);
+    modal.find('.modal-body #cantidad_pendiente').text(cantidad_pendiente);
+
+});

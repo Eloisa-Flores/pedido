@@ -271,6 +271,14 @@
             </button>
         </div>
     @endif
+    @if(session("error"))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{session("error")}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     @if($errors->any())
         <div class="alert alert-warning alert-dismissible fade show " role="alert">
 
@@ -324,7 +332,16 @@
                 <td>{{$homedata->dias}}</td>
 
 
-
+                <td>
+                    <button class="btn btn-sm btn-info"
+                            title="Borrar"
+                            data-toggle="modal"
+                            data-target="#modalBorrarPrestaLibro"
+                            data-id="{{$homedata->id}}"
+                            data-cantidad_pendiente="{{$homedata->cantidad_pendiente}}">
+                        <span>Entregar</span>
+                    </button>
+                </td>
                 <td>
 
 
@@ -341,6 +358,39 @@
     @endforeach
 
 </div>
+<div class="modal fade" id="modalBorrarPrestaLibro" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <form method="post" action="{{route("entregapedido")}}" enctype="multipart/form-data">
+                @method("Put")
+                @csrf
+                <div class="modal-header" style="background: #4986FC">
+
+                    <h5 class="modal-title" style="color: white"><span class="fas fa-trash"></span>Entregar
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span style="color: white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Cantidad Pendiente:  <label
+                            id="cantidad_pendiente"></label> </p>
+
+                </div>
+                <div class="form-group">
+                    <label >Cantidad Entregada</label>
+                    <input type="number" class="form-control" name="cantidad"  placeholder="cantidad Entregada">
+                </div>
+                <div class="modal-footer">
+                    <input id="id" name="id" type="hidden" value="">
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
 
 
 
@@ -352,6 +402,7 @@
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
+
     $(document).ready(function (){
 
         var table = $('#datatable').DataTable();

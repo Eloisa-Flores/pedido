@@ -34,10 +34,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/LibroPendiente/export', 'PrestarLibroController@export2')->name("exportarLibroPendiente");
 
 
-    //--------------------------------------------PARA AREA ROUTES-------------------------------------------------------->
+    //--------------------------------------------PARA Empresa ROUTES-------------------------------------------------------->
     Route::get('/empresa','EmpresaController@index')->name('verarea');
     Route::post('/empresa/crearArea','EmpresaController@store')->name('creararea');
     Route::put('/empresa/editarArea','EmpresaController@edit')->name('editararea');
     Route::delete('/empresa/borrarArea','EmpresaController@destroy')->name('borrararea');
+
+//--------------------------------------------PARA Entrega de Pedido ROUTES-------------------------------------------------------->
+    Route::put('/entregapedido','HomeController@entrega')->name('entregapedido');
 
 });
