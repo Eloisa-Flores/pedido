@@ -131,6 +131,10 @@
                         <label >Descripción</label>
                         <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Ingrese la Descripción">
                     </div>
+
+
+                    <div class="form-group">
+                        <label >Codigo Fabrica</label>
                     <select name="fabrica"
                             required
                             style="width: 100%"
@@ -142,6 +146,7 @@
                             </option>
                         @endforeach
                     </select>
+                    </div>
                     <div class="form-group">
                         <label >Nota</label>
                         <input type="text" class="form-control" name="nota" id="nota" placeholder="Ingrese la nota">
