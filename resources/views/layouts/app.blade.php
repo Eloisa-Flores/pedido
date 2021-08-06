@@ -120,6 +120,7 @@
     <script src="diseno/js/google-map.js"></script>
     <script src="diseno/js/main.js"></script>
     <script src="{{asset("js/empresa.js")}}"></script>
+    <script src="{{asset("js/home.js")}}"></script>
 
 </body>
 </html>

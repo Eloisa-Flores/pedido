@@ -199,7 +199,12 @@
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
 
-                <p> ¿ Esta seguro de borrar los datos ?</p>
+
+                <div class="modal-body">
+                    <p>Esta Seguro que desea Borra:  <label
+                            id="pedido"> ?</label> </p>
+
+                </div>
                 <div class="modal-footer">
                     <button type="button" name="id"  id="deleteForm" class="btn btn-success" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-danger"> Si, Eliminar </button>
@@ -248,7 +253,7 @@
     </button>
     <a type="button" href="{{route('exportar')}}" class="btn btn-success" > Exportar </a>
 
-    <a href="{{url('/import')}}" type="button" class="btn btn-info ><i class="fas fa-file-import"></i> Importar</a>
+    <a href="{{url('/import')}}" type="button" class="btn btn-info" ><i class="fas fa-file-import"></i> Importar</a>
 
     <form  class="d-none d-md-inline-block form-inline
                            ml-auto mr-0 mr-md-2 my-0 my-md-0 mb-md-2">
@@ -350,15 +355,17 @@
                             data-target="#editModal"
                             data-id="{{$homedata->id}}"
                             data-pedido="{{$homedata->pedido}}"
+                            data-codigo="{{$homedata->codigo}}"
+
                             data-descripcion="{{$homedata->descripcion}}"
                             data-fabrica="{{$homedata->fabrica}}"
                             data-nota="{{$homedata->nota}}"
-                            data-fechapedido="{{$homedata->fecha_pedido}}"
-                            data-fecharequerida="{{$homedata->fecha_pedido}}"
+                            data-fecha_pedido="{{$homedata->fecha_pedido}}"
+                            data-fecha_requerida="{{$homedata->fecha_requerida}}"
                             data-empaque="{{$homedata->empaque}}"
-                            data-cantidadoriginal="{{$homedata->cantidad_original}}"
-                            data-catidadrecibida="{{$homedata->cantidad_recibida}}"
-                            data-cantidadpendiente="{{$homedata->cantidad_pendiente}}">
+                            data-cantidad_original="{{$homedata->cantidad_original}}"
+                            data-cantidad_recibida="{{$homedata->cantidad_recibida}}"
+                            data-cantidad_pendiente="{{$homedata->cantidad_pendiente}}">
                         <span >Editar</span>
                     </button>
 
