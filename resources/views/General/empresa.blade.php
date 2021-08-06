@@ -1,12 +1,12 @@
 @extends("layouts.app")
 @section("content")
 
-    <div class="hero-wrap js-fullheight" >
+    <div class="hero-wrap js-fullheight"  style="background-image: url('diseno/images/a3.jpg')">
 
 
     <section class="ftco-section ftco-no-pb ftco-no-pt">
     <div class="container-fluid ">
-        <h1 class="mt-4">Empresas
+        <h1 class="mt-4" style="color: #FFFFFF">Empresas
             <div class="btn-group form-group" role="group" style=" margin-left: 20px; margin-top: 20px">
                 <button class="btn btn-sm btn-success"
                         id="botonAbrirModalNuevaMarca"
@@ -79,7 +79,7 @@
             @endif
     @endif
 
-        <table class="table">
+        <table  class="table table-light" >
             <thead>
             <tr>
                 <th >#</th>

@@ -118,7 +118,7 @@ class PendienteController extends Controller
                 $home->estado = 'Entregado';
                 $home->save();
 
-                return redirect('/pendiente')->withExito( 'Entrega Realizada Exitosamente ') ;
+                return redirect('/pendientes')->withExito( 'Entrega Realizada Exitosamente ') ;
             }
 
 
@@ -131,11 +131,11 @@ class PendienteController extends Controller
                 $home->estado = 'Pendiente';
                 $home->save();
 
-                return redirect('/pendiente')->withExito('Una Parte de la entrega fue realizada exitosamente ');
+                return redirect('/pendientes')->withExito('Una Parte de la entrega fue realizada exitosamente ');
             }
             if ($h->cantidad_pendiente < $cantidad) {
 
-                return redirect('/pendiente')->withError('La cantidad no puede ser mayor a la Pendiente');
+                return redirect('/pendientes')->withError('La cantidad no puede ser mayor a la Pendiente');
             }
         }
 
