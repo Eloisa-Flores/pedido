@@ -2,13 +2,12 @@
 
 namespace App\Exports;
 
-use App\Pedido;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class PedidoExport implements FromCollection ,ShouldAutoSize,  WithHeadings
+class PendienteExport implements FromCollection ,ShouldAutoSize,  WithHeadings
 {
     use \Maatwebsite\Excel\Concerns\Exportable;
 
@@ -26,12 +25,12 @@ class PedidoExport implements FromCollection ,ShouldAutoSize,  WithHeadings
                 "home.nota",
                 "home.fecha_pedido",
                 "home.fecha_requerida",
-                 "home.empaque",
+                "home.empaque",
                 "home.cantidad_original",
-               "home.cantidad_recibida",
-              "home.cantidad_pendiente",
-            "home.created_at")
-            ->where('home.estado','=','Solicitado')
+                "home.cantidad_recibida",
+                "home.cantidad_pendiente",
+                "home.created_at")
+            ->where('home.estado','=','Pendiente')
 
 
             ->orderBy("pedido")->get();

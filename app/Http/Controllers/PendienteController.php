@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Empresa;
+use App\Exports\HistorialExport;
 use App\Exports\LibrosPendientesExports;
+use App\Exports\PendienteExport;
 use App\Libro;
 use App\Pedido;
 use App\PrestarLibro;
@@ -11,6 +13,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PendienteController extends Controller
 {
@@ -138,6 +141,12 @@ class PendienteController extends Controller
 
 
 
+
+    }
+
+    public function exportar(Request  $request)
+    {
+        return Excel::download(new PendienteExport, 'Pedidos-Pendientes.xlsx');
 
     }
 

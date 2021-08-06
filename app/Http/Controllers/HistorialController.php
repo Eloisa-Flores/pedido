@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Empresa;
+use App\Exports\HistorialExport;
+use App\Exports\PedidoExport;
 use App\Pedido;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HistorialController extends Controller
 { public function index(Request $request)
@@ -94,6 +97,14 @@ class HistorialController extends Controller
         $home->delete();
 
         return redirect('/')->with('success', 'Datos Eliminados') ;
+
+    }
+
+    public function exportar(Request  $request)
+    {
+        return Excel::download(new HistorialExport, 'Historial-Pedidos.xlsx');
+
+
 
     }
 

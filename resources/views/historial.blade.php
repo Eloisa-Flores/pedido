@@ -43,7 +43,7 @@
     <br>
 
 
-    <a type="button" href="{{route('exportar')}}" class="btn btn-success" > Exportar </a>
+    <a type="button" href="{{route('exportarHistorial')}}" class="btn btn-success" > Exportar </a>
 
     <form  class="d-none d-md-inline-block form-inline
                            ml-auto mr-0 mr-md-2 my-0 my-md-0 mb-md-2">

@@ -236,7 +236,7 @@ class HomeController extends Controller
     }
     public function exportar(Request  $request)
     {
-        return Excel::download(new PedidoExport, 'users.xlsx');
+        return Excel::download(new PedidoExport, 'Pedidos.xlsx');
 
 
 

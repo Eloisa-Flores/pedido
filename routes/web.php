@@ -21,10 +21,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('/', 'HomeController');
     Route::get('/dashboard', 'DashboardController@index');
-    Route::get('/exportar','HomeController@exportar')->name('exportar');
     Route::get('/import','HomeController@import')->name('import');
     Route::get('/importData', 'HomeController@importData');
     Route::post('/importData', 'HomeController@import2')->name('importData');
+    //---------------------------------------------Exportar -------------------------------------------------------->
+    Route::get('/exportar','HomeController@exportar')->name('exportar');
+    Route::get('/exportarHistorial','HistorialController@exportar')->name('exportarHistorial');
+    Route::get('/exportarPendiente','PendienteController@exportar')->name('exportarPendiente');
+
+
+
 
     //---------------------------------------------pra home -------------------------------------------------------->
     Route::get('/home','HomeController@index')->name('verhome');
