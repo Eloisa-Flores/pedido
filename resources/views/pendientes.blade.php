@@ -19,7 +19,7 @@
 
 {
 
-<body style="background-image: url('image/background.jpg')">
+<body style="background-image: url('diseno/images/a3.jpg')">
 <div class="container">
 
     <br>

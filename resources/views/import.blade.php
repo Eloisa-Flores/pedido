@@ -1,6 +1,6 @@
 <!Doctype html>
 <html>
-<body  style="background-image: url('image/background.jpg')">
+<body  style="background-image: url('/diseno/images/a3.jpg')">
 <script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.mi.js"></script>
     <div class="container">
 <br><br><br><br>

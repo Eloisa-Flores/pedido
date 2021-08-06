@@ -28,7 +28,7 @@
             </div>
 
 
-            <form action="{{action('HomeController@store')}}" method="POST">
+            <form action="{{route("crearhome")}}" method="POST">
 
                 {{csrf_field()}}
                 <div class="modal-body">
@@ -91,7 +91,7 @@
                         <input type="number" class="form-control"  name="cantidad_pendiente" placeholder="Seleccione la cantidad pendiente">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar Datos</button>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                 </button>
             </div>
 
-            <form action="/" method="POST" id="editForm">
+            <form action="{{route("editarhome")}}" method="POST" id="editForm">
                 {{csrf_field()}}
                 {{method_field('put')}}
 
@@ -172,7 +172,7 @@
                     </div>
 
                     <div class="modal-footer" >
-                        <button type="button" name="id" id="editForm" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" name="id" id="editForm" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Actualizar Datos</button>
                     </div>
                 </div>
@@ -194,15 +194,15 @@
                 </button>
             </div>
 
-            <form action="/" method="POST" id="deleteForm">
+            <form action="{{route("eliminarhome")}}" method="POST" id="deleteForm">
 
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
 
                 <p> ¿ Esta seguro de borrar los datos ?</p>
                 <div class="modal-footer">
-                    <button type="button" name="id"  id="deleteForm" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary"> Si, Eliminar </button>
+                    <button type="button" name="id"  id="deleteForm" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger"> Si, Eliminar </button>
                 </div>
                 <input type="hidden" name="id"  id="" value="">
 
@@ -220,7 +220,7 @@
 {{--End importar  Modal --}}
 
 
-<body style="background-image: url('image/background.jpg')">
+<body style="background-image: url('diseno/images/a3.jpg')">
 <div class="container">
 
     <br>
@@ -248,11 +248,12 @@
     </button>
     <a type="button" href="{{route('exportar')}}" class="btn btn-success" > Exportar </a>
 
-    <a href="{{url('/import')}}" type="button" class="btn btn-primary" ><i class="fas fa-file-import"></i> Importar</a>
+    <a href="{{url('/import')}}" type="button" class="btn btn-info ><i class="fas fa-file-import"></i> Importar</a>
+
     <form  class="d-none d-md-inline-block form-inline
                            ml-auto mr-0 mr-md-2 my-0 my-md-0 mb-md-2">
         <div class="input-group" style="width: 300px">
-            <input class="form-control" name="search" type="search" placeholder="Search"
+            <input class="form-control" name="search" type="search" placeholder="Buscador"
                    aria-label="Search">
             <div class="input-group-append">
                 <a id="borrarBusqueda" class="btn btn-danger hideClearSearch" style="color: white"
@@ -340,14 +341,41 @@
                             data-id="{{$homedata->id}}"
                             data-cantidad_pendiente="{{$homedata->cantidad_pendiente}}">
                         <span>Entregar</span>
+
+                    </button>
+                    <button class="btn btn-sm btn-success"
+                            title="Editar"
+                            id="editar_M{{$homedata->id}}"
+                            data-toggle="modal"
+                            data-target="#editModal"
+                            data-id="{{$homedata->id}}"
+                            data-pedido="{{$homedata->pedido}}"
+                            data-descripcion="{{$homedata->descripcion}}"
+                            data-fabrica="{{$homedata->fabrica}}"
+                            data-nota="{{$homedata->nota}}"
+                            data-fechapedido="{{$homedata->fecha_pedido}}"
+                            data-fecharequerida="{{$homedata->fecha_pedido}}"
+                            data-empaque="{{$homedata->empaque}}"
+                            data-cantidadoriginal="{{$homedata->cantidad_original}}"
+                            data-catidadrecibida="{{$homedata->cantidad_recibida}}"
+                            data-cantidadpendiente="{{$homedata->cantidad_pendiente}}">
+                        <span >Editar</span>
+                    </button>
+
+                    <button class="btn btn-sm btn-danger"
+                            title="Borrar"
+                            data-toggle="modal"
+                            data-target="#deleteModal"
+                            data-id="{{$homedata->id}}"
+                            data-pedido="{{$homedata->pedido}}">
+                        <span >Borrar</span>
                     </button>
                 </td>
                 <td>
 
 
-                    <a href="#" class="btn btn-success edit">Editar</a>
+
                 </td><td>
-                    <a href="#" class="btn btn-danger delete" >Eliminar</a>
                 </td>
             </tr>
 
@@ -401,57 +429,7 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
-<script type="text/javascript">
 
-    $(document).ready(function (){
-
-        var table = $('#datatable').DataTable();
-
-        //star Edit Record
-        table.on('click','.edit', function () {
-            $tr = $(this).closest('tr');
-            if ($($tr).hasClass('child')) {
-                $tr = $tr.prev('.parent');
-            }
-            var data = table.row($tr).data();
-            console.log(data);
-
-            $('#pedido').val(data[1]);
-            $('#codigo').val(data[2]);
-            $('#descripcion').val(data[3]);
-            $('#fabrica').val(data[4]);
-            $('#nota').val(data[5]);
-            $('#fecha_pedido').val(data[6]);
-            $('#fecha_requerida').val(data[7]);
-            $('#empaque').val(data[8]);
-            $('#cantidad_original').val(data[9]);
-            $('#cantidad_recibida').val(data[10]);
-            $('#cantidad_pendiente').val(data[11]);
-
-
-            $('#editForm').attr('action','/'+data[0]);
-            $('#editModal').modal('show');
-        });
-        //End Edit Record
-
-        //star Delete Record
-        table.on('click','.delete', function () {
-            $tr = $(this).closest('tr');
-            if ($($tr).hasClass('child')) {
-                $tr = $tr.prev('.parent');
-            }
-            var data = table.row($tr).data();
-            console.log(data);
-
-            // $('#id').val(data[0]);
-
-            $('#deleteForm').attr('action','/'+data[0]);
-            $('#deleteModal').modal('show');
-        });
-        //End Delete Record
-    });
-
-</script>
 
 
 </body>

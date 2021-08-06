@@ -26,6 +26,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/importData', 'HomeController@importData');
     Route::post('/importData', 'HomeController@import2')->name('importData');
 
+    //---------------------------------------------pra home -------------------------------------------------------->
+    Route::get('/home','HomeController@index')->name('verhome');
+    Route::post('/home/crearhome','HomeController@store')->name('crearhome');
+    Route::put('/home/editarhome','HomeController@update')->name('editarhome');
+    Route::delete('/home/borrar','HomeController@destroy')->name('eliminarhome');
 
     //--------------------------------------------PARA Pendietes Libros ROUTES-------------------------------------------------------->
     Route::get('/LibroPendiente','PrestarLibroController@index2')->name('LibroPendiente');
