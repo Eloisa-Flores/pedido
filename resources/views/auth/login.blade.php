@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/image/pedido.jpg" />
 </head>
 
-<body>
+<body style="background-image: url('diseno/images/a3.jpg')">
 
 <div class="container" id="log-in-form">
     <div class="heading">

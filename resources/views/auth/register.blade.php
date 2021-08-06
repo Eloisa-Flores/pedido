@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
-<body>
+<body style="background-image: url('diseno/images/a3.jpg')">
 <div class="container" id="registration-form">
     <div class="image"></div>
     <div class="frm justify-content" >

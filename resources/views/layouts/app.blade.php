@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Control Pedidos') }}</title>
+    <title>{{ config('Control Pedidos', 'Control Pedidos') }}</title>
 
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -33,7 +33,7 @@
             <div class="container">
                 <img src={{asset('image/pedido.jpg')}} alt="" style="width: 4rem">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Control Pedidos') }}
+                    {{ config('Control Pedidos', 'Control Pedidos') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menú
