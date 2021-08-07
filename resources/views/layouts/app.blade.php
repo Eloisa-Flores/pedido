@@ -29,7 +29,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light btn-info shadow-sm" style="background-color: #6f4e37">
             <div class="container">
                 <img src={{asset('image/pedido.jpg')}} alt="" style="width: 4rem">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -41,16 +41,16 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item  active">
-                            <a class="dropdown-item" href="/pendientes">Pendientes</a> <div class="dropdown-menu">
+                            <a class="dropdown-item" style="color: white" href="/pendientes">Pendientes</a> <div class="dropdown-menu">
 
                             </div></li>
 
                         <li class="nav-item  active">
-                            <a class="dropdown-item " href="/historial">Historial </a>
+                            <a class="dropdown-item " style="color: white" href="/historial">Historial </a>
 
                         </li>
                         <li class="nav-item  active">
-                            <a class="dropdown-item " href="/empresa">Empresas </a>
+                            <a class="dropdown-item " style="color: white" href="/empresa">Empresas </a>
 
                         </li>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -77,15 +77,15 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" style="color: white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" style="color: white" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar Sesion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
