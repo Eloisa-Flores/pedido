@@ -4,7 +4,7 @@
 <script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.mi.js"></script>
     <div class="container">
 <br><br><br><br>
-        <h2 align="center">Importar Pedidos</h2>
+        <h2 align="center"  style="color: #ffffff">Importar Pedidos</h2>
 <div align="center">
     @if(count($errors) > 0)
         <div class="alert alert-danger">
@@ -21,6 +21,7 @@
             <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>{{$message}}</strong></div>
         @endif
+        <div class="container" style="background-color: #a0601a">
     <form method="post" action="{{route('importData')}}" enctype="multipart/form-data">
 {{csrf_field()}}
 <div class="row">
@@ -35,6 +36,7 @@
 
 </div>
 </form>
+
 </div>
     </div>
 </body>

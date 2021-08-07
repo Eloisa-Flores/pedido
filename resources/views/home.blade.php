@@ -86,10 +86,7 @@
                         <label >Cantidad Recibida</label>
                         <input type="number" class="form-control"  name="cantidad_recibida" placeholder="Seleccione la cantidad recibida">
                     </div>
-                    <div class="form-group">
-                        <label >Cantidad Pendiente</label>
-                        <input type="number" class="form-control"  name="cantidad_pendiente" placeholder="Seleccione la cantidad pendiente">
-                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar Datos</button>
@@ -113,9 +110,9 @@
                 </button>
             </div>
 
-            <form action="{{route("editarhome")}}" method="POST" id="editForm">
+            <form action="{{route("editarhome")}}" method="POST" id="editForm" enctype="multipart/form-data">>
                 {{csrf_field()}}
-                {{method_field('put')}}
+                {{method_field('PUT')}}
 
                 <div class="modal-body">
                     <div class="form-group">
@@ -171,10 +168,7 @@
                         <label >Cantidad Recibida</label>
                         <input type="number" class="form-control"  name="cantidad_recibida" id="cantidad_recibida" placeholder="Seleccione la cantidad recibida">
                     </div>
-                    <div class="form-group">
-                        <label >Cantidad Pendiente</label>
-                        <input type="number" class="form-control"  name="cantidad_pendiente" id="cantidad_pendiente" placeholder="Seleccione la cantidad pendiente">
-                    </div>
+
 
                     <div class="modal-footer" >
                         <button type="button" name="id" id="editForm" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -423,7 +417,7 @@
                 </div>
                 <div class="modal-footer">
                     <input id="id" name="id" type="hidden" value="">
-                    <button type="submit" class="btn btn-danger">Borrar</button>
+                    <button type="submit" class="btn btn-danger">Entregar</button>
                     <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>

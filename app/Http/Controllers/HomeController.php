@@ -134,7 +134,7 @@ class HomeController extends Controller
             'empaque'=>'required',
             'cantidad_original'=>'required',
             'cantidad_recibida'=>'required',
-            'cantidad_pendiente'=>'required',
+
         ]);
 
         $home = new Pedido();
@@ -148,7 +148,7 @@ class HomeController extends Controller
         $home->empaque = $request->input('empaque');
         $home->cantidad_original = $request->input('cantidad_original');
         $home->cantidad_recibida = $request->input('cantidad_recibida');
-        $home->cantidad_pendiente = $request->input('cantidad_pendiente');
+        $home->cantidad_pendiente = $request->input('cantidad_original') - $request->input('cantidad_recibida');
         $home->dias ='0';
 
         $home->save();
@@ -198,10 +198,10 @@ class HomeController extends Controller
             'empaque'=>'required',
             'cantidad_original'=>'required',
             'cantidad_recibida'=>'required',
-            'cantidad_pendiente'=>'required',
+
         ]);
 
-        $home = new Pedido();
+        $home = Pedido::findOrFail($id);
         $home->pedido = $request->input('pedido');
         $home->codigo = $request->input('codigo');
         $home->descripcion = $request->input('descripcion');
@@ -212,7 +212,7 @@ class HomeController extends Controller
         $home->empaque = $request->input('empaque');
         $home->cantidad_original = $request->input('cantidad_original');
         $home->cantidad_recibida = $request->input('cantidad_recibida');
-        $home->cantidad_pendiente = $request->input('cantidad_pendiente');
+        $home->cantidad_pendiente = $request->input('cantidad_original') - $request->input('cantidad_recibida');
 
 
         $home->save();

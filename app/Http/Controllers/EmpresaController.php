@@ -37,7 +37,7 @@ class EmpresaController extends Controller
         $name = $request->input("name");
 
         $area->save();
-        return redirect()->route("verarea")->withExito("area creada correctamente");
+        return redirect()->route("verarea")->withExito("Empresa creada correctamente");
         //
     }
 
@@ -65,7 +65,7 @@ class EmpresaController extends Controller
                 $editar->name=$request->input("name");
                 $editar->codigo=$request->input("codigo");
                 $editar->save();
-                return redirect()->route("verarea")->withExito("Area editada correctamente");
+                return redirect()->route("verarea")->withExito("Empresa editada correctamente");
             }catch (ValidationException $exception){
                 return redirect()->route("verarea")->with('errores','errores')->with('id',$request->input("id"))->winthErrors($exception->errors());
             }

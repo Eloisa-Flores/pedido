@@ -1,6 +1,6 @@
 
 html{
-    background: url("/image/a4.jpg") no-repeat;
+    background: url("diseno/images/a3.jpg") no-repeat;
     background-size: cover;
     min-height: 100%;
 }
@@ -16,7 +16,7 @@ body{
 
 #registration-form .image{
     float:left;
-    background-image: url("/image/a4.jpg");
+    background-image: url("diseno/images/a3.jpg");
     height: 500px;
     width: 50%;
     background-size: cover;
