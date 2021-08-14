@@ -53,11 +53,15 @@ Route::group(['middleware' => 'auth'], function () {
 
 //--------------------------------------------PARA Entrega de Pedido ROUTES-------------------------------------------------------->
     Route::put('/entregapedido','HomeController@entrega')->name('entregapedido');
+    Route::get('/factura','HomeController@descargar')->name('factura');
+    Route::get('/facturaP/{id}','HomeController@descargarP')->name('facturaP');
+
 
 
 
     //--------------------------------------------PARA Pendientes ROUTES-------------------------------------------------------->
     Route::get('/pendientes','PendienteController@index')->name('pendientes');
+
     Route::put('/entregapedidos','PendienteController@entrega')->name('entregapedidos');
 
 

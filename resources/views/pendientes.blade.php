@@ -137,6 +137,11 @@
                             data-cantidad_pendiente="{{$homedata->cantidad_pendiente}}">
                         <span>Entregar</span>
                     </button>
+
+                    <a href="{{ url('facturaP/'.$homedata->id)}}"
+                       class="btn-descargar" target="_blank">
+                        <i class="fas fa-download"></i>
+                    </a>
                 </td>
 
             </tr>
@@ -169,12 +174,31 @@
                 </div>
                 <div class="form-group">
                     <label >Cantidad Entregada</label>
-                    <input type="number" class="form-control" name="cantidad"  placeholder="cantidad Entregada">
+                    <input type="number" class="form-control" name="cantidad" onkeyup="sumar();"
+                           id="cantidad" placeholder="cantidad Entregada">
                 </div>
+                <script >
+
+                    function sumar() {
+                        var  cantidad =  document.getElementById("cantidad").value;
+
+                        document.getElementById("resultado").value = cantidad;
+                    }   </script>
+
                 <div class="modal-footer">
                     <input id="id" name="id" type="hidden" value="">
                     <button type="submit" class="btn btn-danger">Entregar</button>
                     <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+
+            <form method="get" action="{{route("factura")}}" enctype="multipart/form-data">
+                @method("get")
+                @csrf
+                <div class="modal-footer">
+                    <input id="id" name="id" type="hidden" value="">
+                    <input  type="hidden"  name="resultado"  id="resultado" value="">
+                    <button type="submit" class="btn btn-info">Descargar</button>
                 </div>
             </form>
         </div>

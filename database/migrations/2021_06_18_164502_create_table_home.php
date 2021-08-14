@@ -16,9 +16,9 @@ class CreateTableHome extends Migration
         Schema::create('home', function (Blueprint $table) {
                $table->increments('id');
             $table->string('pedido');
-            $table->string('codigo')->references("codigo")->on("empresas");
+            $table->string('codigo');
             $table->string('descripcion');
-            $table->string('fabrica');
+            $table->string('fabrica')->references("codigo")->on("empresas");
             $table->string('nota');
             $table->date('fecha_pedido');
             $table->date('fecha_requerida');

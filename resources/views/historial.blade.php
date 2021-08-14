@@ -112,9 +112,15 @@
                     <td>{{$homedata->fecha_pedido}}</td>
                     <td>{{$homedata->cantidad_original}}</td>
 
-
+<td>
+    <a href="{{ url('facturaP/'.$homedata->id)}}"
+       class="btn-descargar" target="_blank">
+        <i class="fas fa-download"></i>
+    </a>
+</td>
 
                 </tr>
+
             @endforeach
             </tbody>
 

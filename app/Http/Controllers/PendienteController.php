@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Empresa;
+use App\Exports\FacturaExport;
 use App\Exports\HistorialExport;
 use App\Exports\LibrosPendientesExports;
 use App\Exports\PendienteExport;
@@ -117,6 +118,7 @@ class PendienteController extends Controller
                 $home->cantidad_pendiente = 0;
                 $home->estado = 'Entregado';
                 $home->save();
+                 Excel::download(new FacturaExport($cantidad,$id), 'Factura.xlsx');
 
                 return redirect('/pendientes')->withExito( 'Entrega Realizada Exitosamente ') ;
             }
@@ -130,6 +132,7 @@ class PendienteController extends Controller
                 $home->cantidad_pendiente =($h->cantidad_original - $cantidad);
                 $home->estado = 'Pendiente';
                 $home->save();
+                 Excel::download(new FacturaExport($cantidad,$id), 'Factura.xlsx');
 
                 return redirect('/pendientes')->withExito('Una Parte de la entrega fue realizada exitosamente ');
             }

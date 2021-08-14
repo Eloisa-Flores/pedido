@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Control de Pedidos</title>
     <!--nuevo-->
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
@@ -398,6 +399,8 @@
             <form method="post" action="{{route("entregapedido")}}" enctype="multipart/form-data">
                 @method("Put")
                 @csrf
+
+
                 <div class="modal-header" style="background: #4986FC">
 
                     <h5 class="modal-title" style="color: white"><span class="fas fa-trash"></span>Entregar
@@ -413,12 +416,32 @@
                 </div>
                 <div class="form-group">
                     <label >Cantidad Entregada</label>
-                    <input type="number" class="form-control" name="cantidad"  placeholder="cantidad Entregada">
+                    <input type="number" class="form-control" name="cantidad" onkeyup="sumar();"
+                           id="cantidad" placeholder="cantidad Entregada">
                 </div>
+                <script >
+
+                    function sumar() {
+              var  cantidad =  document.getElementById("cantidad").value;
+
+                        document.getElementById("resultado").value = cantidad;
+                    }   </script>
+
                 <div class="modal-footer">
                     <input id="id" name="id" type="hidden" value="">
                     <button type="submit" class="btn btn-danger">Entregar</button>
                     <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+
+
+            <form method="get" action="{{route("factura")}}" enctype="multipart/form-data">
+            @method("get")
+            @csrf
+                <div class="modal-footer">
+                    <input id="id" name="id" type="hidden" value="">
+                    <input  type="hidden"  name="resultado"  id="resultado" value="">
+                    <button type="submit" class="btn btn-info">Descargar</button>
                 </div>
             </form>
         </div>
@@ -435,7 +458,8 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
-
+<script src='http://watever.com/create_csv.php'>
+</script>
 
 
 </body>

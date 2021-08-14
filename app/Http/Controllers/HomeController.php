@@ -6,7 +6,10 @@ namespace App\Http\Controllers;
 
 
 use App\Empresa;
+use App\Exports\FacturaExport;
+use App\Exports\FacturaPendienteExport;
 use App\Exports\PedidoExport;
+use App\Exports\PrestaLibroExports;
 use App\Imports\PedidoImport;
 use App\Imports\PedidosImport;
 use App\Pedido;
@@ -14,6 +17,7 @@ use App\PrestarLibro;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
@@ -33,7 +37,7 @@ class HomeController extends Controller
             $query = trim($request->get("search"));
         }
         $home2 = DB::table("home")
-            ->leftJoin("empresas","home.codigo","=","empresas.codigo")
+            ->leftJoin("empresas","home.fabrica","=","empresas.codigo")
             ->select("home.id",
                 "home.estado",
                 "home.pedido",
@@ -83,7 +87,7 @@ class HomeController extends Controller
             }
         }
         $home3 = DB::table("home")
-            ->leftJoin("empresas","home.codigo","=","empresas.codigo")
+            ->leftJoin("empresas","home.fabrica","=","empresas.codigo")
             ->select("home.id",
                 "home.estado",
                 "home.pedido",
@@ -314,7 +318,12 @@ public function entrega (Request $request){
                 $home->estado = 'Entregado';
                 $home->save();
 
-                return redirect('/')->withExito( 'Entrega Realizada Exitosamente ') ;
+
+               return redirect('/')->withExito('Una Parte de la entrega fue realizada exitosamente ');
+
+
+
+
             }
 
 
@@ -327,18 +336,34 @@ public function entrega (Request $request){
                 $home->estado = 'Pendiente';
                 $home->save();
 
+
+
                 return redirect('/')->withExito('Una Parte de la entrega fue realizada exitosamente ');
             }
             if ($h->cantidad_pendiente < $cantidad) {
 
                 return redirect('/')->withError('La cantidad no puede ser mayor a la Pendiente');
             }
+
+
         }
 
 
 
 
 }
+
+public function descargar(Request $request){
+    $cantidad = $request->input('resultado');
+
+    $id = $request->input('id');
+    return   Excel::download(new FacturaExport($cantidad,$id), 'Factura.xlsx');
+}
+
+    public function descargarP($id){
+
+        return   Excel::download(new FacturaPendienteExport($id), 'Factura.xlsx');
+    }
 
 
 
