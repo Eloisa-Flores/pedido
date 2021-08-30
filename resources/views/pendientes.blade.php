@@ -140,7 +140,7 @@
 
                     <a href="{{ url('facturaP/'.$homedata->id)}}"
                        class="btn-descargar" target="_blank">
-                        <i class="fas fa-download"></i>
+                        <i class="fa fa-download" aria-hidden="true"></i>
                     </a>
                 </td>
 

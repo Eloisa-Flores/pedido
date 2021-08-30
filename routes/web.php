@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::resource('/', 'HomeController');
+    //Route::resource('/', 'HomeController');
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/import','HomeController@import')->name('import');
     Route::get('/importData', 'HomeController@importData');
@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //---------------------------------------------pra home -------------------------------------------------------->
-    Route::get('/home','HomeController@index')->name('verhome');
+    Route::get('/home','HomeController@index')->name('home');
     Route::post('/home/crearhome','HomeController@store')->name('crearhome');
     Route::put('/home/editarhome','HomeController@update')->name('editarhome');
     Route::delete('/home/borrar','HomeController@destroy')->name('eliminarhome');
